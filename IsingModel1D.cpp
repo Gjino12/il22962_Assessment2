@@ -15,3 +15,10 @@ void IsingModel1D::initialize_spins() {
         spins[i] = spin_dist(rng) == 0 ? -1 : 1;
     }
 }
+
+double IsingModel1D::energy_change(int index) {
+    int left = spins[(index - 1 + num_spins) % num_spins];
+    int right = spins[(index + 1) % num_spins];
+    double dE = 2.0 * spins[index] * (left + right);
+    return dE;
+}
