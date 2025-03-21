@@ -16,6 +16,7 @@ public:
     IsingModel1D(int n, double beta_val);
     void initialize_spins();
     double energy_change(int index);
+    void monte_carlo_step();
 };
 
 #endif

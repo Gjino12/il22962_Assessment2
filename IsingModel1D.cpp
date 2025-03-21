@@ -22,3 +22,13 @@ double IsingModel1D::energy_change(int index) {
     double dE = 2.0 * spins[index] * (left + right);
     return dE;
 }
+
+void IsingModel1D::monte_carlo_step() {
+    std::uniform_int_distribution<int> spin_index(0, num_spins - 1);
+    int idx = spin_index(rng);
+    double dE = energy_change(idx);
+    double probability = std::exp(-beta * dE);
+    if (dE <= 0.0 || dist(rng) < probability) {
+        spins[idx] *= -1;
+    }
+}
