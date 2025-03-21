@@ -19,6 +19,7 @@ public:
     void monte_carlo_step();
     double total_energy();
     double magnetization();
+    void simulate(int steps, int burn_in, int sample_interval);
 };
 
 #endif

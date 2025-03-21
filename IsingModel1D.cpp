@@ -44,3 +44,25 @@ double IsingModel1D::total_energy() {
 double IsingModel1D::magnetization() {
     return std::accumulate(spins.begin(), spins.end(), 0);
 }
+
+void IsingModel1D::simulate(int steps, int burn_in, int sample_interval) {
+    for (int i = 0; i < burn_in; ++i) {
+        monte_carlo_step();
+    }
+
+    double energy_sum = 0.0;
+    double mag_sum = 0.0;
+    int samples_taken = 0;
+
+    for (int i = 0; i < steps; ++i) {
+        monte_carlo_step();
+        if (i % sample_interval == 0) {
+            energy_sum += total_energy();
+            mag_sum += magnetization();
+            ++samples_taken;
+        }
+    }
+
+    std::cout << "Average Energy per spin: " << energy_sum / samples_taken / num_spins << '\n';
+    std::cout << "Average Magnetization per spin: " << mag_sum / samples_taken / num_spins << '\n';
+}
