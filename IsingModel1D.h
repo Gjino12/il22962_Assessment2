@@ -1,0 +1,21 @@
+#ifndef ISINGMODEL1D_H
+#define ISINGMODEL1D_H
+
+#include <vector>
+#include <random>
+
+class IsingModel1D {
+private:
+    std::vector<int> spins;
+    int num_spins;
+    double beta;
+    std::mt19937 rng;
+    std::uniform_real_distribution<double> dist;
+
+public:
+    IsingModel1D(int n, double beta_val);
+    void initialize_spins();
+    double energy_change(int index);
+};
+
+#endif
