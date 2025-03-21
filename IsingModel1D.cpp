@@ -32,3 +32,15 @@ void IsingModel1D::monte_carlo_step() {
         spins[idx] *= -1;
     }
 }
+
+double IsingModel1D::total_energy() {
+    double E = 0.0;
+    for (int i = 0; i < num_spins; ++i) {
+        E -= spins[i] * spins[(i + 1) % num_spins];
+    }
+    return E;
+}
+
+double IsingModel1D::magnetization() {
+    return std::accumulate(spins.begin(), spins.end(), 0);
+}

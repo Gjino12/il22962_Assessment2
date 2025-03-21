@@ -17,6 +17,8 @@ public:
     void initialize_spins();
     double energy_change(int index);
     void monte_carlo_step();
+    double total_energy();
+    double magnetization();
 };
 
 #endif
