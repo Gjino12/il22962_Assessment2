@@ -7,9 +7,8 @@
 class IsingModel2D : public IsingModel1D {
 public:
     IsingModel2D(int size, double beta, int seed);
-    void simulate(int steps, int burn_in, int sample_interval);
-    void save_spins_to_file(const std::string& filename); 
-
+    void simulate(int steps, int burn_in, int sample_interval, const std::string& filename);
+    void save_spins_to_file(const std::string& filename);
 private:
     int size;
     std::vector<std::vector<int>> spins;

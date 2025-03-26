@@ -66,11 +66,14 @@ void IsingModel2D::save_spins_to_file(const std::string& filename) {
    file.close();
 }
 
-void IsingModel2D::simulate(int steps, int burn_in, int sample_interval) {
+void IsingModel2D::simulate(int steps, int burn_in, int sample_interval, const std::string& filename) {
+    std::ofstream file(filename, std::ios::app);
+
     for (int i = 0; i < burn_in; ++i)
         monte_carlo_step();
 
-    double energy_sum = 0.0, mag_sum = 0.0;
+    double energy_sum = 0.0;
+    double mag_sum = 0.0;
     int samples_taken = 0;
 
     for (int i = 0; i < steps; ++i) {
@@ -82,6 +85,15 @@ void IsingModel2D::simulate(int steps, int burn_in, int sample_interval) {
         }
     }
 
-    std::cout << "Average Energy per spin: " << energy_sum / samples_taken / (size * size) << '\n';
-    std::cout << "Average Magnetization per spin: " << mag_sum / samples_taken / (size * size) << '\n';
+    double avg_energy = energy_sum / samples_taken / (size * size);
+    double avg_magnetization = mag_sum / samples_taken / (size * size);
+
+    file << (1.0 / beta) << ","
+         << avg_energy << ","
+         << avg_magnetization << "\n";
+
+    file.close();
+
+    std::cout << "Average Energy per spin: " << avg_energy << '\n';
+    std::cout << "Average Magnetization per spin: " << avg_magnetization << '\n';
 }
