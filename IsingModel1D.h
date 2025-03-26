@@ -5,14 +5,12 @@
 #include <random>
 
 class IsingModel1D {
-private:
+    public:
     std::vector<int> spins;
     int num_spins;
     double beta;
     std::mt19937 rng;
     std::uniform_real_distribution<double> dist;
-
-public:
     IsingModel1D(int n, double beta_val);
     void initialize_spins();
     double energy_change(int index);

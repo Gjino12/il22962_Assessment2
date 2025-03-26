@@ -3,8 +3,7 @@
 #include <numeric>
 #include <cmath>
 
-IsingModel1D::IsingModel1D(int n, double beta_val)
-    : num_spins(n), beta(beta_val), rng(std::random_device{}()), dist(0.0, 1.0) {
+IsingModel1D::IsingModel1D(int n, double beta_val): num_spins(n), beta(beta_val), rng(std::random_device{}()), dist(0.0, 1.0) {
     spins.resize(num_spins);
     initialize_spins();
 }
