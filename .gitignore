@@ -1,33 +1,25 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
+# Compiled object files
 *.o
-*.obj
 
-# Precompiled Headers
-*.gch
-*.pch
+# Executable binary
+ising_model
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Generated visualization files (e.g., plots, images)
+*.png
+*.jpg
+*.jpeg
+*.svg
 
-# Fortran module files
-*.mod
-*.smod
+# Python cache and environment files
+_pycache_/
+*.pyc
+venv/
+env/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# System-specific files
+.DS_Store
+.vscode/
+.idea/
 
-# Executables
-*.exe
-*.out
-*.app
-ising_simulation
+# Temporary or log files
+*.log
