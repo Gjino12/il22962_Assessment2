@@ -19,7 +19,7 @@ class IsingModel1D {
     double magnetization();
     void setSpins(const std::vector<int>& config);
     int size() const;
-    void simulate(int steps, int burn_in, int sample_interval);
+    void simulate(int steps, int burn_in, int sample_interval, const std::string& filename);
 };
 
 #endif

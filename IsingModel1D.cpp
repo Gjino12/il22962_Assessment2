@@ -58,10 +58,13 @@ int IsingModel1D::size() const {
     return num_spins;
 }
 
-void IsingModel1D::simulate(int steps, int burn_in, int sample_interval) {
-    for (int i = 0; i < burn_in; ++i) {
+#include <fstream>
+
+void IsingModel1D::simulate(int steps, int burn_in, int sample_interval, const std::string& filename) {
+    std::ofstream file(filename, std::ios::app);
+
+    for (int i = 0; i < burn_in; ++i)
         monte_carlo_step();
-    }
 
     double energy_sum = 0.0;
     double mag_sum = 0.0;
@@ -76,6 +79,12 @@ void IsingModel1D::simulate(int steps, int burn_in, int sample_interval) {
         }
     }
 
-    std::cout << "Average Energy per spin: " << energy_sum / samples_taken / num_spins << '\n';
-    std::cout << "Average Magnetization per spin: " << mag_sum / samples_taken / num_spins << '\n';
+    double avg_energy = energy_sum / samples_taken / num_spins;
+    double avg_magnetization = mag_sum / samples_taken / num_spins;
+
+    file << (1.0 / beta) << "," 
+         << avg_energy << "," 
+         << avg_magnetization << "\n";
+
+    file.close();
 }

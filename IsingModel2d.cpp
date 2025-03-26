@@ -2,6 +2,7 @@
 #include <iostream>
 #include <numeric>
 #include <cmath>
+#include <fstream>
 
 IsingModel2D::IsingModel2D(int s, double beta_val, int seed): IsingModel1D(s * s, beta_val, seed), size(s) {
     spins.resize(size, std::vector<int>(size));
@@ -52,6 +53,17 @@ double IsingModel2D::magnetization() {
     for (const auto& row : spins)
         M += std::accumulate(row.begin(), row.end(), 0.0);
     return M;
+}
+
+void IsingModel2D::save_spins_to_file(const std::string& filename) {
+    std::ofstream file(filename);
+    for(int i = 0; i < size; ++i) {
+        for(int j = 0; j < size; ++j) {
+            file << spins[i][j] << " ";
+        }
+        file << "\n";
+    }
+   file.close();
 }
 
 void IsingModel2D::simulate(int steps, int burn_in, int sample_interval) {
