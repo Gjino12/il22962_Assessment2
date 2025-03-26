@@ -11,12 +11,14 @@ class IsingModel1D {
     double beta;
     std::mt19937 rng;
     std::uniform_real_distribution<double> dist;
-    IsingModel1D(int n, double beta_val);
+    IsingModel1D(int n, double beta_val, int seed);
     void initialize_spins();
     double energy_change(int index);
     void monte_carlo_step();
     double total_energy();
     double magnetization();
+    void setSpins(const std::vector<int>& config);
+    int size() const;
     void simulate(int steps, int burn_in, int sample_interval);
 };
 

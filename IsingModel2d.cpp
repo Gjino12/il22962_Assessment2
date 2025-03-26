@@ -3,8 +3,7 @@
 #include <numeric>
 #include <cmath>
 
-IsingModel2D::IsingModel2D(int s, double beta_val)
-    : IsingModel1D(s * s, beta_val), size(s) {
+IsingModel2D::IsingModel2D(int s, double beta_val, int seed): IsingModel1D(s * s, beta_val, seed), size(s) {
     spins.resize(size, std::vector<int>(size));
     initialize_spins();
 }

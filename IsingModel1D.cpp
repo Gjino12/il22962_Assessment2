@@ -3,7 +3,9 @@
 #include <numeric>
 #include <cmath>
 
-IsingModel1D::IsingModel1D(int n, double beta_val): num_spins(n), beta(beta_val), rng(std::random_device{}()), dist(0.0, 1.0) {
+IsingModel1D::IsingModel1D(int n, double beta_val, int seed): num_spins(n), beta(beta_val), rng(seed), dist(0.0, 1.0) {
+    spins.resize(num_spins); 
+    initialize_spins();
     spins.resize(num_spins);
     initialize_spins();
 }
@@ -42,6 +44,18 @@ double IsingModel1D::total_energy() {
 
 double IsingModel1D::magnetization() {
     return std::accumulate(spins.begin(), spins.end(), 0);
+}
+
+void IsingModel1D::setSpins(const std::vector<int>& config) {
+    if (config.size() == spins.size()) {
+        spins = config;
+    } else {
+        std::cerr << "Error: spin configuration size mismatch!" << std::endl;
+    }
+}
+
+int IsingModel1D::size() const {
+    return num_spins;
 }
 
 void IsingModel1D::simulate(int steps, int burn_in, int sample_interval) {
