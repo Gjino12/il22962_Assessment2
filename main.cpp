@@ -35,15 +35,15 @@ void test2DModel() {
     cout << "===== Official 2D Ising Model Test =====" << endl;
 
     cout << "\nLow Temperature (high beta):" << endl;
-    IsingModel2D model2D_lowT(10, 1.0);
+    IsingModel2D model2D_lowT(10, 1.0, 4321);  // Added seed
     model2D_lowT.simulate(50000, 5000, 10);
 
     cout << "\nHigh Temperature (low beta):" << endl;
-    IsingModel2D model2D_highT(10, 0.1);
+    IsingModel2D model2D_highT(10, 0.1, 5678); // Added seed
     model2D_highT.simulate(50000, 5000, 10);
 
-    cout << "\nMedium Temperature:" << endl;
-    IsingModel2D model2D_mediumT(10, 0.44);
+    cout << "\nMedium Temperature (medium beta):" << endl;
+    IsingModel2D model2D_mediumT(10, 0.44, 8765); // Added seed
     model2D_mediumT.simulate(50000, 5000, 10);
 }
 
