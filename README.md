@@ -9,40 +9,51 @@ The **Ising model** consists of spins $s_i$ that can take values $+1$ or $-1$. S
 
 - **1D Total Energy:** For a chain of $N$ spins with periodic boundary conditions (spin $N+1$ is spin 1), the energy is:  
 
-  $$
-  E_{\text{1D}} \;=\; -J \sum_{i=1}^{N} s_i\, s_{i+1}
-  $$
+$$
+E_{\text{1D}} = -J \sum_{i=1}^{N} s_i s_{i+1}.
+$$
 
   where $s_{N+1} \equiv s_1$. Each neighboring pair $s_i s_{i+1}$ contributes $-J$ if aligned ($s_i s_{i+1}=+1$) or $+J$ if anti-aligned ($s_i s_{i+1}=-1$). A fully aligned 1D chain has minimal energy $E_{\text{1D}} = -J N$.
 
-- **2D Total Energy:** For an $L \times L$ square lattice with periodic boundaries (a torus topology), the energy sums interactions for each spin with its four neighbors (up, down, left, right):  
-  $$
-  E_{\text{2D}} \;=\; -J \sum_{x=1}^{L}\sum_{y=1}^{L} \Big( s_{x,y}\,s_{x+1,y} \;+\; s_{x,y}\,s_{x,y+1} \Big),
-  $$
+- **2D Total Energy:** For an $L \times L$ square lattice with periodic boundaries (a torus topology), the energy sums interactions for each spin with its four neighbors (up, down, left, right):
+
+$$
+E_{\text{2D}} = -J \sum_{x=1}^{L}\sum_{y=1}^{L} \Big( s_{x,y} s_{x+1,y} + s_{x,y} s_{x,y+1} \Big),
+$$
+
   where indices wrap around at the boundaries. Each bond is counted once; for a fully aligned lattice, $E_{\text{2D}} = -2 J L^2$ (since each spin contributes effectively two bonds). In both formulas, we set $J=1$ for simplicity.
 
-**Magnetization ($M$)** is defined as:
+- **Magnetization ($M$)** is defined as:
+
 $$
-M \;=\; \sum_i s_i \quad \text{(or } \sum_{x,y} s_{x,y} \text{ in 2D)},
+M = \sum_i s_i \quad \text{(or } \sum_{x,y} s_{x,y} \text{ in 2D)},
 $$
+
 with magnetization per spin $m = M/N$ (or $M/(L^2)$ in 2D). In a fully aligned configuration, $m = \pm 1$; in a disordered state, $m \approx 0$.
 
 **Monte Carlo and Metropolis Criterion:**  
 The simulation uses the Metropolis Monte Carlo algorithm at temperature $T$ (with inverse temperature $\beta = 1/(k_BT)$, and $k_B=1$). For a proposed spin flip:
+
 - **Energy Change Calculation:** For example, in 1D,
-  $$
-  \Delta E_{\text{1D}} \;=\; 2J\, s_i \big(s_{i-1} + s_{i+1}\big),
-  $$
+
+$$
+\Delta E_{\text{1D}} = 2J\, s_i \big(s_{i-1} + s_{i+1}\big),
+$$
+
   and in 2D,
-  $$
-  \Delta E_{\text{2D}} \;=\; 2J\, s_{x,y}\, \big(s_{x-1,y} + s_{x+1,y} + s_{x,y-1} + s_{x,y+1}\big).
-  $$
-- **Acceptance Criterion:**  
+
+$$
+\Delta E_{\text{2D}} \;=\; 2J\, s_{x,y}\, \big(s_{x-1,y} + s_{x+1,y} + s_{x,y-1} + s_{x,y+1}\big).
+$$
+
+- **Acceptance Criterion:**
   If $\Delta E \le 0$, the flip is accepted. Otherwise, the flip is accepted with probability
-  $$
-  P = e^{-\beta \Delta E}.
-  $$
-  A random number $r \in [0,1]$ is generated, and the spin is flipped if $r < P$.
+
+$$
+P = e^{-\beta \Delta E}.
+$$
+
+A random number $r \in [0,1]$ is generated, and the spin is flipped if $r < P$.
 
 ## Implementation: 1D and 2D Ising Models
 
@@ -179,7 +190,7 @@ Average Energy per spin: -1.5436
 
 Average Magnetization per spin: -0.8205
 
-  - Confirmation messages for CSV file creation. CSV files should 
+  - Confirmation messages for CSV file creation. 
 - **Plots:**
   - *Energy per Spin vs Temperature* and *Magnetization per Spin vs Temperature* graphs for both 1D and 2D models are generated.
 
